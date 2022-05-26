@@ -8,7 +8,13 @@ pipeline {
         AWS_DEFAULT_REGION="us-east-2"
     }
     stages{
-   
+        stage ('check config') {
+            steps {
+                script{
+                  sh 'export isResourceDeleted $(cat .proton/deployment-metadata.json | jq .isResourceDeleted)'
+                  }
+              }   
+        }
         stage ('terraform init') {
             steps {
                 script{
@@ -32,17 +38,16 @@ pipeline {
                 }
             }
              steps {
-                dir("sagemaker"){
-                    script{
-                     try{
-                        sh 'terraform apply'
-                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status SUCCEEDED'
-                     }catch(Exception e){
-                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status FAILED'
-                     }
-                      
+                script{
+                    try{
+                    sh 'terraform apply'
+                    sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status SUCCEEDED'
+                    }catch(Exception e){
+                    sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status FAILED'
                     }
+                    
                 }
+                
             }
         }
     post { 
