@@ -5,45 +5,46 @@ pipeline {
         timestamps()
     }
     environment {
-        AWS_DEFAULT_REGION="us-east-1"
+        AWS_DEFAULT_REGION="us-east-2"
     }
     stages{
    
-        stage ('install dependencies') {
+        stage ('terraform init') {
             steps {
                 script{
-                  sh 'echo hello'
+                  sh 'terraform init'
                   }
               }   
         }
-        stage ('download data') {
-            steps {
-                dir("sagemaker/data"){
-                    script{
-                    sh 'echo hello'
-                    }
-                }
-            }
-        }
-        stage ('train model') {
+        stage ('terraform plan') {
             steps {
                 dir("sagemaker"){
                     script{
-                       sh 'echo hello'
+                        sh 'terraform plan'
                     }
                 }
             }
         }
-        stage ('deploy model') {
+        stage ('terraform apply') {
+            when{
+                expression {
+                    env.GIT_BRANCH == 'master'
+                }
+            }
              steps {
                 dir("sagemaker"){
                     script{
-                       sh 'echo hello'
+                     try{
+                        sh 'terraform apply'
+                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status SUCCEEDED'
+                     }catch(Exception e){
+                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status FAILED'
+                     }
+                      
                     }
                 }
             }
         }
-    }
     post { 
         always {
             script{
