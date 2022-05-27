@@ -48,7 +48,7 @@ pipeline {
                             id: 'confirm',
                             message: 'Apply Terraform',
                             parameters:[[
-                                $class: 'BooleanParameterDefination'
+                                $class: 'BooleanParameterDefination',
                                 defaultValue: false,
                                 description: 'Apply Terraform',
                                 name: 'Approved'
