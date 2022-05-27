@@ -6,14 +6,7 @@ To manage this resource, see AWS Proton Resource: arn:aws:proton:us-east-2:75369
 If the resource is no longer accessible within AWS Proton, it may have been deleted and may require manual cleanup.
 */
 
-terraform {
-  required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.0.2"
-    }
-  }
-}
+
 data "template_file" "credentials" {
   template = "${file("${path.module}/credentials.example")}"
   vars = {
