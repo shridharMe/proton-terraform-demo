@@ -75,7 +75,7 @@ pipeline {
                 script{
                     dir("terraform-operator"){
                         try{
-                            sh 'terraform apply'
+                            sh 'terraform apply -auto-approve'
                             sh "aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status SUCCEEDED"
                         }catch(Exception e){
                             sh "aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status FAILED"
@@ -94,7 +94,7 @@ pipeline {
                 script{
                     dir("terraform-operator"){
                         try{
-                            sh 'terraform destroy'
+                            sh 'terraform destroy -auto-approve'
                             sh "aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status SUCCEEDED"
                         }catch(Exception e){
                             sh "aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status FAILED"
