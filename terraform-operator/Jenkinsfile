@@ -47,7 +47,7 @@ pipeline {
         stage ('Approve terraform plan') {
             when{
                 expression {
-                    env.GIT_BRANCH == 'master' 
+                    env.GIT_BRANCH == 'main' 
                 }
             }
             steps {
@@ -76,7 +76,7 @@ pipeline {
         stage ('terraform apply') {
             when{
                 expression {
-                    env.GIT_BRANCH == 'master' && !env.isResourceDeleted
+                    env.GIT_BRANCH == 'main' && !env.isResourceDeleted
                 }
             }
             steps {
@@ -92,10 +92,10 @@ pipeline {
                 }
             }
         }
-        stage ('terraform true') {
+        stage ('terraform destroy') {
             when{
                 expression {
-                    env.GIT_BRANCH == 'master' && env.isResourceDeleted
+                    env.GIT_BRANCH == 'main' && env.isResourceDeleted
                 }
             }
             steps {
