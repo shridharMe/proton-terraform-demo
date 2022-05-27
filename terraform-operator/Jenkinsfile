@@ -65,7 +65,7 @@ pipeline {
 
                     if(!approval){
                         currentBuild.result = 'ABORTED'
-                        sh 'aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status FAILED'
+                        sh "aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status FAILED"
                         error("Terraform plan not approved, aborting")
                     }
                 }
@@ -101,9 +101,9 @@ pipeline {
                     dir("terraform-operator"){
                         try{
                             sh 'terraform destroy'
-                            sh 'aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status SUCCEEDED'
+                            sh "aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status SUCCEEDED"
                         }catch(Exception e){
-                            sh 'aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status FAILED'
+                            sh "aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status FAILED"
                         }
                     }
                 }
@@ -125,7 +125,7 @@ pipeline {
         }
         failure {
             script {
-              sh 'aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status FAILED'
+              sh "aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status FAILED"
              }
         }
     }
