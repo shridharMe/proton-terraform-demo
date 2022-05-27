@@ -17,7 +17,7 @@ pipeline {
                 script{
                     dir("terraform-operator"){
                         env.isResourceDeleted = sh(returnStdout: true, script: 'cat .proton/deployment-metadata.json | jq .isResourceDeleted').trim()
-                        env.protonArn = sh(returnStdout: true, script: cat .proton/deployment-metadata.json | jq .resourceMetadata.arn).trim()
+                        env.protonArn = sh(returnStdout: true, script: `cat .proton/deployment-metadata.json | jq .resourceMetadata.arn`).trim()
                         sh 'python3 updateTerraVars.py'
                         sh 'aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status IN_PROGRESS'
                     }
