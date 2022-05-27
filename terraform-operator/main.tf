@@ -7,11 +7,21 @@ If the resource is no longer accessible within AWS Proton, it may have been dele
 */
 
 
+resource "local_file" "credentials" {
+    content  = <<START
+credentials app.terraform.io {
+  token = ${var.environment.inputs.terraform_cloud_api_token}
+}
+
+START
+    filename = "${path.module}/credentials"
+}
+
 data "template_file" "credentials" {
   template = "${file("${path.module}/credentials.example")}"
-  vars = {
+  /*vars = {
     TERRAFORM_CLOUD_API_TOKEN = var.environment.inputs.terraform_cloud_api_token
-  }
+  }*/
 }
 
 provider "kubernetes" {
