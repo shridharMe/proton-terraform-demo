@@ -68,7 +68,7 @@ pipeline {
         stage ('terraform apply') {
             when{
                 expression {
-                    env.GIT_BRANCH == 'main' && env.isResourceDeleted == False
+                    env.GIT_BRANCH == 'main' && (env.isResourceDeleted==true)
                 }
             }
             steps {
@@ -87,7 +87,7 @@ pipeline {
         stage ('terraform destroy') {
             when{
                 expression {
-                    env.GIT_BRANCH == 'main' && env.isResourceDeleted == True
+                    env.GIT_BRANCH == 'main' && (env.isResourceDeleted==false) 
                 }
             }
             steps {
