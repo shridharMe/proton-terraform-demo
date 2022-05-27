@@ -6,7 +6,6 @@ To manage this resource, see AWS Proton Resource: arn:aws:proton:us-east-2:75369
 If the resource is no longer accessible within AWS Proton, it may have been deleted and may require manual cleanup.
 */
 
-
 data "template_file" "credentials" {
   template = "${file("${path.module}/credentials.example")}"
   vars = {
