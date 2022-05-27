@@ -120,9 +120,7 @@ pipeline {
         }
         success { 
               script {
-                      sh '''
-                       echo " build successfull "
-                      '''
+                      sh 'aws proton notify-resource-deployment-status-change --resource-arn ${protonArn} --status SUCCEEDED'
                 }
         }
         failure {
