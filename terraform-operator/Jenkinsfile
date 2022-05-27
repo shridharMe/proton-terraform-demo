@@ -14,24 +14,30 @@ pipeline {
         stage ('check config') {
             steps {
                 script{
-                    env.isResourceDeleted = sh(returnStdout: true, script: 'cat .proton/deployment-metadata.json | jq .isResourceDeleted').trim()
-                    env.protonArn = sh(returnStdout: true, script: 'cat .proton/deployment-metadata.json | jq .resourceMetadata.arn').trim()
-                    python3 updateTerraVars.py
-                    sh 'aws proton notify-resource-deployment-status-change --resource-arn "${protonArn}" --status IN_PROGRESS'
+                    dir("terraform-operator"){
+                        env.isResourceDeleted = sh(returnStdout: true, script: 'cat .proton/deployment-metadata.json | jq .isResourceDeleted').trim()
+                        env.protonArn = sh(returnStdout: true, script: 'cat .proton/deployment-metadata.json | jq .resourceMetadata.arn').trim()
+                        python3 updateTerraVars.py
+                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "${protonArn}" --status IN_PROGRESS'
+                    }
                 }
             }   
         }
         stage ('terraform init') {
             steps {
                 script{
+                  dir("terraform-operator"){  
                   sh 'terraform init'
+                  }
                 }
             }   
         }
         stage ('terraform plan') {
             steps {
                 script{
-                    sh 'terraform plan'
+                    dir("terraform-operator"){
+                     sh 'terraform plan'
+                    }
                 }
             }
         }
@@ -72,11 +78,13 @@ pipeline {
             }
             steps {
                 script{
-                    try{
-                        sh 'terraform apply'
-                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status SUCCEEDED'
-                    }catch(Exception e){
-                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status FAILED'
+                    dir("terraform-operator"){
+                        try{
+                            sh 'terraform apply'
+                            sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status SUCCEEDED'
+                        }catch(Exception e){
+                            sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status FAILED'
+                        }
                     }
                 }
             }
@@ -89,11 +97,13 @@ pipeline {
             }
             steps {
                 script{
-                    try{
-                        sh 'terraform destroy'
-                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status SUCCEEDED'
-                    }catch(Exception e){
-                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status FAILED'
+                    dir("terraform-operator"){
+                        try{
+                            sh 'terraform destroy'
+                            sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status SUCCEEDED'
+                        }catch(Exception e){
+                            sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status FAILED'
+                        }
                     }
                 }
             }
