@@ -1,0 +1,124 @@
+pipeline {
+    agent  any
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '14'))
+        timestamps()
+    }
+    environment {
+        TERRAFROM_CLOUD_API_TOKEN =credentials('TERRAFROM_CLOUD_API_TOKEN')
+        AWS_ACCESS_KEY_ID=credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_AWS_ACCESS_KEY=credentials('AWS_SECRET_AWS_ACCESS_KEY')
+        AWS_SESSION_TOKEN=credentials('AWS_SESSION_TOKEN')
+    }       
+    stages{
+        stage ('check config') {
+            steps {
+                script{
+                    env.isResourceDeleted = sh(returnStdout: true, script: 'cat .proton/deployment-metadata.json | jq .isResourceDeleted').trim()
+                    env.protonArn = sh(returnStdout: true, script: 'cat .proton/deployment-metadata.json | jq .resourceMetadata.arn').trim()
+                    python3 updateTerraVars.py
+                    sh 'aws proton notify-resource-deployment-status-change --resource-arn "${protonArn}" --status IN_PROGRESS'
+                }
+            }   
+        }
+        stage ('terraform init') {
+            steps {
+                script{
+                  sh 'terraform init'
+                }
+            }   
+        }
+        stage ('terraform plan') {
+            steps {
+                script{
+                    sh 'terraform plan'
+                }
+            }
+        }
+        stage ('Approve terraform plan') {
+            when{
+                expression {
+                    env.GIT_BRANCH == 'master' 
+                }
+            }
+            steps {
+                script{
+                     timeout(unit: 'MINUTES', time: 15){
+                        approval=input(
+                            id: 'confirm',
+                            message: 'Apply Terraform'
+                            parameters:[[
+                                $class: 'BooleanParameterDefination'
+                                defaultValue: false,
+                                description: 'Apply Terraform',
+                                name: 'Approved'
+                            ]]
+                         )
+                     }
+
+                    if(!approval){
+                        currentBuild.result = 'ABORTED'
+                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status FAILED'
+                        error("Terraform plan not approved, aborting")
+                    }
+                }
+            }
+        }
+        stage ('terraform apply') {
+            when{
+                expression {
+                    env.GIT_BRANCH == 'master' && !env.isResourceDeleted
+                }
+            }
+            steps {
+                script{
+                    try{
+                        sh 'terraform apply'
+                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status SUCCEEDED'
+                    }catch(Exception e){
+                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status FAILED'
+                    }
+                }
+            }
+        }
+        stage ('terraform true') {
+            when{
+                expression {
+                    env.GIT_BRANCH == 'master' && env.isResourceDeleted
+                }
+            }
+            steps {
+                script{
+                    try{
+                        sh 'terraform destroy'
+                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status SUCCEEDED'
+                    }catch(Exception e){
+                        sh 'aws proton notify-resource-deployment-status-change --resource-arn "arn:aws:proton:us-east-2:753690273280:environment/vpc-primary" --status FAILED'
+                    }
+                }
+            }
+        }
+    post { 
+        always {
+            script{
+                   echo "build cleanup "
+            }
+        }
+        success { 
+              script {
+                      sh '''
+                       echo " build successfull "
+                      '''
+                }
+        }
+        failure {
+            script {
+                    
+                sh '''
+                    echo " build failed "
+                '''
+             }
+        }
+    }
+    
+}
