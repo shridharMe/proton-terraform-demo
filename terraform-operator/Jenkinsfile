@@ -53,8 +53,13 @@ pipeline {
             steps {
                 script{
                      timeout(unit: 'MINUTES', time: 15){
-                        approval=input message: 'Apply terraform', parameters: [booleanParam(name: 'Confirm', defaultValue: false)]
-                         )
+                         approval=input {
+                             message: 'Apply terraform', 
+                                 parameters: {
+                                     [booleanParam(name: 'Confirm', defaultValue: false)]
+                                 }
+                         }
+                         
                      }
 
                     if(!approval){
