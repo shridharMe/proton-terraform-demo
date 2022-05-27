@@ -1,10 +1,10 @@
 {
-  "deploymentId" : "529a947e-97b9-4d6b-bc75-c0b9b4bcc8f4",
+  "deploymentId" : "4e2c93a7-865e-4fe4-9af4-5397f490e6b6",
   "isResourceDeleted" : false,
   "resourceMetadata" : {
     "arn" : "arn:aws:proton:us-east-2:753690273280:environment/terraform-operator",
     "templateArn" : "arn:aws:proton:us-east-2:753690273280:environment-template/terraform-operator",
     "templateMajorVersion" : "1",
-    "templateMinorVersion" : "4"
+    "templateMinorVersion" : "5"
   }
 }

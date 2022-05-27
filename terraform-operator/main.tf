@@ -15,7 +15,7 @@ terraform {
   }
 }
 data "template_file" "credentials" {
-  template = "${file("${path.module}/file/credentials.example")}"
+  template = "${file("${path.module}/credentials.example")}"
   vars = {
     TERRAFORM_CLOUD_API_TOKEN = var.environment.inputs.terraform_cloud_api_token
   }
