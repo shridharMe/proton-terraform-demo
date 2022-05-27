@@ -64,3 +64,9 @@ resource "helm_release" "operator" {
     kubernetes_secret.workspacesecrets
   ]
 }
+
+resource "kubernetes_namespace" "edu" {
+  metadata {
+    name = "edu"
+  }
+}
