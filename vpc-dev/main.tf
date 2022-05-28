@@ -5,6 +5,7 @@ To manage this resource, see AWS Proton Resource: arn:aws:proton:us-east-2:75369
 
 If the resource is no longer accessible within AWS Proton, it may have been deleted and may require manual cleanup.
 */
+
 locals {
   local_data = jsondecode(file("${path.module}/proton.auto.tfvars.json"))
 }

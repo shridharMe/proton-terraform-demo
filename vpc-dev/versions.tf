@@ -18,12 +18,6 @@ terraform {
     }
   }
   required_version = "~>1.0"
-  backend "s3" {
-    bucket         = "proton-terraform-states"
-    key            = "vpc-env/terraform.tfstate"
-    region         = "us-east-2"
-    encrypt        = true
-  }
 }
 
 
