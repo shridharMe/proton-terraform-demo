@@ -1,5 +1,5 @@
 {
-  "deploymentId" : "65ebbd79-3def-4f4d-a761-0c60a6f9854c",
+  "deploymentId" : "e930b050-a860-44d6-81e3-0707cf4d3c98",
   "isResourceDeleted" : false,
   "resourceMetadata" : {
     "arn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-test",
