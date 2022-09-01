@@ -1,6 +1,6 @@
 {
-  "deploymentId" : "a4407245-1990-4451-a043-7e4dad0a56a5",
-  "isResourceDeleted" : false,
+  "deploymentId" : "<proton-resource-deleted>",
+  "isResourceDeleted" : true,
   "resourceMetadata" : {
     "arn" : "arn:aws:proton:us-west-2:753690273280:service/app-3/service-instance/team1",
     "templateArn" : "arn:aws:proton:us-west-2:753690273280:service-template/micro-app",
