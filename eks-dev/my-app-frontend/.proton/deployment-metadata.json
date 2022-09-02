@@ -1,0 +1,11 @@
+{
+  "deploymentId" : "f94d93e2-f7c9-47de-ac3e-aad5169dcd80",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-west-2:753690273280:service/my-app/service-instance/frontend",
+    "templateArn" : "arn:aws:proton:us-west-2:753690273280:service-template/micro-app",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "0",
+    "environmentArn" : "arn:aws:proton:us-west-2:753690273280:environment/eks-dev"
+  }
+}
