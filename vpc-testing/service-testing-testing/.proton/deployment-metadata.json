@@ -1,0 +1,11 @@
+{
+  "deploymentId" : "07731c78-64b4-4e13-a007-b9f312392a4d",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-2:753690273280:service/service-testing/service-instance/testing",
+    "templateArn" : "arn:aws:proton:us-east-2:753690273280:service-template/micro-app",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "8",
+    "environmentArn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-testing"
+  }
+}
