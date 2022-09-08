@@ -1,0 +1,11 @@
+{
+  "deploymentId" : "25615727-7933-40d8-8552-5bdfab815bca",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-2:753690273280:service/my-shine-service/service-instance/my-shine-service-instance",
+    "templateArn" : "arn:aws:proton:us-east-2:753690273280:service-template/micro-app",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "8",
+    "environmentArn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-testing"
+  }
+}
