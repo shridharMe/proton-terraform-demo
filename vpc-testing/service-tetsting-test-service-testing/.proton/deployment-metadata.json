@@ -1,0 +1,11 @@
+{
+  "deploymentId" : "f32d1f7f-25ec-4ab9-9805-19501b4fcff6",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-2:753690273280:service/service-tetsting/service-instance/test-service-testing",
+    "templateArn" : "arn:aws:proton:us-east-2:753690273280:service-template/apigw_lambda",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "1",
+    "environmentArn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-testing"
+  }
+}
