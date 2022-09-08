@@ -1,0 +1,11 @@
+{
+  "deploymentId" : "582809b2-bc89-4e1a-a0c6-58f32b410e7d",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-2:753690273280:service/test-service/service-instance/tong-instance",
+    "templateArn" : "arn:aws:proton:us-east-2:753690273280:service-template/micro-app",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "8",
+    "environmentArn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-testing"
+  }
+}
