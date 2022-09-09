@@ -1,0 +1,10 @@
+{
+  "deploymentId" : "ec8082f9-922e-47de-ba47-729cac2a5b6f",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-cricket-testing",
+    "templateArn" : "arn:aws:proton:us-east-2:753690273280:environment-template/vpc-env",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "16"
+  }
+}
