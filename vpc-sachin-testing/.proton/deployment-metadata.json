@@ -1,0 +1,10 @@
+{
+  "deploymentId" : "543f9988-d0c8-4867-b4da-a2ed4522bd8c",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-sachin-testing",
+    "templateArn" : "arn:aws:proton:us-east-2:753690273280:environment-template/vpc-env",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "16"
+  }
+}
