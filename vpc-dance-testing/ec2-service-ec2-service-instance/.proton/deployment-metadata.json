@@ -1,0 +1,11 @@
+{
+  "deploymentId" : "648a5705-1e04-498a-9836-9f10fdd8e9a8",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-2:753690273280:service/ec2-service/service-instance/ec2-service-instance",
+    "templateArn" : "arn:aws:proton:us-east-2:753690273280:service-template/ec2",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "0",
+    "environmentArn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-dance-testing"
+  }
+}
