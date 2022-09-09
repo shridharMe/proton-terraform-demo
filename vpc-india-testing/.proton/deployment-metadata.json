@@ -1,0 +1,10 @@
+{
+  "deploymentId" : "d41dc7f5-8a4f-427e-9728-173676e9515c",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-india-testing",
+    "templateArn" : "arn:aws:proton:us-east-2:753690273280:environment-template/vpc-env",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "16"
+  }
+}
