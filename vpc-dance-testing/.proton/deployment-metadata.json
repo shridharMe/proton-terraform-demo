@@ -1,0 +1,10 @@
+{
+  "deploymentId" : "8f92bf83-8f52-4aa9-b62a-915a7540f60b",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-dance-testing",
+    "templateArn" : "arn:aws:proton:us-east-2:753690273280:environment-template/vpc-env",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "16"
+  }
+}
