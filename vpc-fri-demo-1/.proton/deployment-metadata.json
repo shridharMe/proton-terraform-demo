@@ -1,0 +1,10 @@
+{
+  "deploymentId" : "550ebf18-2c2c-411a-9462-d7e6f517b6ca",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-fri-demo-1",
+    "templateArn" : "arn:aws:proton:us-east-2:753690273280:environment-template/vpc-env",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "15"
+  }
+}
