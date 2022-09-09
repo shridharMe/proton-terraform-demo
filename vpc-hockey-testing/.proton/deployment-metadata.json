@@ -1,0 +1,10 @@
+{
+  "deploymentId" : "0f2b45d5-6d44-472a-8043-7306d551e96e",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-hockey-testing",
+    "templateArn" : "arn:aws:proton:us-east-2:753690273280:environment-template/vpc-env",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "16"
+  }
+}
