@@ -1,0 +1,11 @@
+{
+  "deploymentId" : "98068569-3a75-4ad0-8828-c54d639f16a5",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-2:753690273280:service/ec2/service-instance/instamce",
+    "templateArn" : "arn:aws:proton:us-east-2:753690273280:service-template/ec2",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "0",
+    "environmentArn" : "arn:aws:proton:us-east-2:753690273280:environment/vpc-india-testing"
+  }
+}
