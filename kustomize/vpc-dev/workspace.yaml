@@ -1,0 +1,29 @@
+apiVersion: app.terraform.io/v1alpha1
+kind: Workspace
+metadata:
+  name: vpc-dev
+  namespace: edu
+spec:
+  module:
+    source: git::https://github.com/shridharMe/proton-terraform-demo//vpc-dev?ref=1.0.134
+  organization: shridharMe
+  outputs:
+  - key: vpc_id
+    moduleOutputName: vpc_id
+  - key: vpc_security_group_id
+    moduleOutputName: vpc_security_group_id
+  - key: aws_region
+    moduleOutputName: aws_region
+  secretsMountPath: /tmp/secrets
+  variables:
+  - environmentVariable: true
+    key: AWS_DEFAULT_REGION
+    sensitive: false
+    valueFrom:
+      configMapKeyRef:
+        key: region
+        name: aws-configuration-vpc-dev
+  - environmentVariable: true
+    key: CONFIRM_DESTROY
+    sensitive: false
+    value: '1'
