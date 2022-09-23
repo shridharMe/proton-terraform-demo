@@ -1,6 +1,6 @@
 {
-  "deploymentId" : "a344a247-6b48-41cd-b66b-0343c9bc467b",
-  "isResourceDeleted" : false,
+  "deploymentId" : "<proton-resource-deleted>",
+  "isResourceDeleted" : true,
   "resourceMetadata" : {
     "arn" : "arn:aws:proton:us-east-2:753690273280:environment/eks-citi",
     "templateArn" : "arn:aws:proton:us-east-2:753690273280:environment-template/eks",
